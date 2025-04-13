@@ -4,472 +4,176 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>لوحة التحكم - مختبر أحمد نصف الضيعة للأسنان</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="./css/admin.css">
 </head>
 <body>
-    <!-- قسم تسجيل الدخول -->
-    <div class="login-container" id="login-section">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-6 col-lg-5">
-                    <div class="login-card">
-                        <div class="text-center mb-4">
-                            <i class="fas fa-user-shield fa-4x text-primary"></i>
-                            <h2 class="mt-3">تسجيل الدخول</h2>
-                            <p class="text-muted">لوحة تحكم مختبر أحمد نصف الضيعة للأسنان</p>
-                        </div>
-                        
-                        <form id="login-form">
-                            <div class="mb-3">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="username" placeholder="اسم المستخدم" required>
-                                    <label for="username">اسم المستخدم</label>
-                                </div>
-                            </div>
-                            
-                            <div class="mb-4">
-                                <div class="form-floating">
-                                    <input type="password" class="form-control" id="password" placeholder="كلمة المرور" required>
-                                    <label for="password">كلمة المرور</label>
-                                </div>
-                            </div>
-                            
-                            <div class="d-grid">
-                                <button type="submit" class="btn btn-primary btn-lg">
-                                    <i class="fas fa-sign-in-alt me-2"></i> تسجيل الدخول
-                                </button>
-                            </div>
-                            
-                            <div class="login-response mt-3 text-center" id="login-response"></div>
-                            
-                            <div class="text-center mt-4">
-                                <a href="index.html" class="text-decoration-none">
-                                    <i class="fas fa-arrow-right me-1"></i> العودة إلى الموقع الرئيسي
-                                </a>
-                            </div>
-                        </form>
-                    </div>
+    <div class="login-container" id="loginContainer">
+        <div class="login-form">
+            <h2>تسجيل الدخول إلى لوحة التحكم</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">اسم المستخدم</label>
+                    <input type="text" id="username" name="username" required>
                 </div>
-            </div>
+                <div class="form-group">
+                    <label for="password">كلمة المرور</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn">تسجيل الدخول</button>
+            </form>
+            <div class="error-message" id="loginError"></div>
         </div>
     </div>
 
-    <!-- لوحة التحكم -->
-    <div class="admin-panel-container d-none" id="admin-panel-section">
-        <!-- القائمة العلوية -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+    <div class="admin-panel" id="adminPanel" style="display: none;">
+        <header class="admin-header">
             <div class="container">
-                <a class="navbar-brand" href="#">لوحة تحكم مختبر أحمد نصف الضيعة للأسنان</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#" data-section="dashboard">الرئيسية</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-section="profile">الملف الشخصي</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-section="services">الخدمات</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-section="portfolio">معرض الأعمال</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-section="messages">الرسائل</a>
-                        </li>
-                    </ul>
-                    <div class="d-flex">
-                        <button id="logout-btn" class="btn btn-light">
-                            <i class="fas fa-sign-out-alt me-1"></i> تسجيل الخروج
-                        </button>
-                    </div>
-                </div>
+                <h1>لوحة التحكم - مختبر أحمد نصف الضيعة للأسنان</h1>
+                <button id="logoutBtn" class="btn-logout">تسجيل الخروج</button>
             </div>
-        </nav>
+        </header>
 
-        <div class="container py-5">
-            <!-- لوحة القيادة -->
-            <div class="admin-section active" id="dashboard-section">
-                <h2 class="section-title mb-4">لوحة القيادة</h2>
-                
-                <div class="row">
-                    <div class="col-md-4 mb-4">
-                        <div class="stat-card">
-                            <div class="stat-card-body">
-                                <div class="stat-card-icon">
-                                    <i class="fas fa-eye"></i>
-                                </div>
-                                <div class="stat-card-info">
-                                    <h3 class="stat-card-title">0</h3>
-                                    <p class="stat-card-text">عدد الزيارات</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-4 mb-4">
-                        <div class="stat-card">
-                            <div class="stat-card-body">
-                                <div class="stat-card-icon">
-                                    <i class="fas fa-envelope"></i>
-                                </div>
-                                <div class="stat-card-info">
-                                    <h3 class="stat-card-title">0</h3>
-                                    <p class="stat-card-text">الرسائل الجديدة</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-4 mb-4">
-                        <div class="stat-card">
-                            <div class="stat-card-body">
-                                <div class="stat-card-icon">
-                                    <i class="fas fa-images"></i>
-                                </div>
-                                <div class="stat-card-info">
-                                    <h3 class="stat-card-title">7</h3>
-                                    <p class="stat-card-text">صور المعرض</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="row mt-4">
-                    <div class="col-md-6 mb-4">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h5 class="card-title">روابط سريعة</h5>
-                                <div class="list-group mt-3">
-                                    <a href="#" class="list-group-item list-group-item-action" data-section="profile">
-                                        <i class="fas fa-user me-2"></i> تعديل الملف الشخصي
-                                    </a>
-                                    <a href="#" class="list-group-item list-group-item-action" data-section="services">
-                                        <i class="fas fa-cogs me-2"></i> إدارة الخدمات
-                                    </a>
-                                    <a href="#" class="list-group-item list-group-item-action" data-section="portfolio">
-                                        <i class="fas fa-images me-2"></i> إدارة معرض الأعمال
-                                    </a>
-                                    <a href="#" class="list-group-item list-group-item-action" data-section="messages">
-                                        <i class="fas fa-envelope me-2"></i> عرض الرسائل
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-6 mb-4">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h5 class="card-title">آخر التحديثات</h5>
-                                <ul class="list-group mt-3">
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        <span><i class="fas fa-check-circle text-success me-2"></i> تم إنشاء الموقع</span>
-                                        <span class="badge bg-primary rounded-pill">اليوم</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="admin-container">
+            <div class="admin-sidebar">
+                <ul class="admin-menu">
+                    <li class="active" data-section="profile"><i class="fas fa-user"></i> الملف الشخصي</li>
+                    <li data-section="services"><i class="fas fa-tooth"></i> الخدمات</li>
+                    <li data-section="portfolio"><i class="fas fa-images"></i> معرض الأعمال</li>
+                    <li data-section="messages"><i class="fas fa-envelope"></i> الرسائل</li>
+                </ul>
             </div>
 
-            <!-- قسم الملف الشخصي -->
-            <div class="admin-section" id="profile-section">
-                <h2 class="section-title mb-4">إدارة الملف الشخصي</h2>
-                
-                <div class="card">
-                    <div class="card-body">
-                        <form id="profile-form">
-                            <div class="row">
-                                <div class="col-md-4 text-center mb-4 mb-md-0">
-                                    <div class="profile-image-container">
-                                        <img src="images/logo/profile.jpg" alt="الصورة الشخصية" class="img-fluid rounded-circle admin-profile-image" id="profile-preview">
-                                        <div class="profile-image-overlay">
-                                            <i class="fas fa-camera"></i>
-                                        </div>
-                                    </div>
-                                    <input type="file" id="profile-image" class="d-none" accept="image/*">
-                                    <button type="button" class="btn btn-outline-primary mt-3" id="change-profile-btn">
-                                        <i class="fas fa-camera me-2"></i> تغيير الصورة
-                                    </button>
-                                </div>
-                                
-                                <div class="col-md-8">
-                                    <div class="mb-3">
-                                        <label for="profile-name" class="form-label">الاسم</label>
-                                        <input type="text" class="form-control" id="profile-name" value="أحمد نصف الضيعة">
-                                    </div>
-                                    
-                                    <div class="mb-3">
-                                        <label for="profile-title" class="form-label">المسمى الوظيفي</label>
-                                        <input type="text" class="form-control" id="profile-title" value="فني أسنان - مختبر أسنان">
-                                    </div>
-                                    
-                                    <div class="mb-3">
-                                        <label for="profile-phone" class="form-label">رقم الهاتف</label>
-                                        <input type="tel" class="form-control" id="profile-phone" value="+963991667365">
-                                    </div>
-                                    
-                                    <div class="mb-3">
-                                        <label for="profile-email" class="form-label">البريد الإلكتروني</label>
-                                        <input type="email" class="form-control" id="profile-email" value="ahmadnisfaldayea123@gmail.com">
-                                    </div>
-                                    
-                                    <div class="mb-3">
-                                        <label for="profile-about" class="form-label">نبذة عن المختبر</label>
-                                        <textarea class="form-control" id="profile-about" rows="4">مختبر متخصص في صناعة وتركيب الأسنان بأعلى معايير الجودة والدقة. نقدم خدمات متكاملة في مجال صناعة الأسنان بخبرة متميزة وأسعار منافسة.</textarea>
-                                    </div>
-                                    
-                                    <div class="d-grid">
-                                        <button type="submit" class="btn btn-primary">
-                                            <i class="fas fa-save me-2"></i> حفظ التغييرات
-                                        </button>
-                                    </div>
-                                </div>
+            <div class="admin-content">
+                <!-- قسم الملف الشخصي -->
+                <div class="admin-section active" id="profile-section">
+                    <h2>تعديل الملف الشخصي</h2>
+                    <form id="profileForm">
+                        <div class="form-group">
+                            <label for="profileName">الاسم</label>
+                            <input type="text" id="profileName" name="profileName" value="أحمد نصف الضيعة">
+                        </div>
+                        <div class="form-group">
+                            <label for="profileTitle">المهنة</label>
+                            <input type="text" id="profileTitle" name="profileTitle" value="فني أسنان">
+                        </div>
+                        <div class="form-group">
+                            <label for="profilePhone">رقم الهاتف</label>
+                            <input type="tel" id="profilePhone" name="profilePhone" value="+963991667365">
+                        </div>
+                        <div class="form-group">
+                            <label for="profileEmail">البريد الإلكتروني</label>
+                            <input type="email" id="profileEmail" name="profileEmail" value="ahmadnisfaldayea123@gmail.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="profileImage">الصورة الشخصية</label>
+                            <div class="profile-image-container">
+                                <img id="profileImagePreview" src="./images/logo/profile.jpg" alt="الصورة الشخصية">
+                                <input type="file" id="profileImage" name="profileImage" accept="image/*">
+                                <label for="profileImage" class="btn-upload">تغيير الصورة</label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn">حفظ التغييرات</button>
+                    </form>
+                </div>
+
+                <!-- قسم الخدمات -->
+                <div class="admin-section" id="services-section">
+                    <h2>إدارة الخدمات</h2>
+                    <div class="services-list" id="servicesList">
+                        <div class="service-item">
+                            <h3>جسور معدنية</h3>
+                            <p>نقدم خدمات تصنيع وتركيب الجسور المعدنية بأعلى جودة وبمواد ذات متانة عالية تدوم لفترات طويلة.</p>
+                            <div class="service-actions">
+                                <button class="btn-edit" data-index="0">تعديل</button>
+                            </div>
+                        </div>
+                        <div class="service-item">
+                            <h3>جسور خزفية</h3>
+                            <p>تصنيع جسور خزفية بمواصفات عالية الجودة تجمع بين المتانة والمظهر الطبيعي الجميل.</p>
+                            <div class="service-actions">
+                                <button class="btn-edit" data-index="1">تعديل</button>
+                            </div>
+                        </div>
+                        <div class="service-item">
+                            <h3>زيركون</h3>
+                            <p>تركيبات زيركون عالية الجودة تمنح أسنانك مظهراً طبيعياً ومتانة فائقة مع مقاومة للتآكل والكسر.</p>
+                            <div class="service-actions">
+                                <button class="btn-edit" data-index="2">تعديل</button>
+                            </div>
+                        </div>
+                        <div class="service-item">
+                            <h3>بدلات - تقويم</h3>
+                            <p>خدمات متكاملة في مجال البدلات السنية والتقويم بأحدث التقنيات وبأسعار منافسة.</p>
+                            <div class="service-actions">
+                                <button class="btn-edit" data-index="3">تعديل</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="service-edit-form" id="serviceEditForm" style="display: none;">
+                        <h3>تعديل الخدمة</h3>
+                        <form id="editServiceForm">
+                            <input type="hidden" id="serviceIndex" name="serviceIndex">
+                            <div class="form-group">
+                                <label for="serviceName">اسم الخدمة</label>
+                                <input type="text" id="serviceName" name="serviceName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="serviceDescription">وصف الخدمة</label>
+                                <textarea id="serviceDescription" name="serviceDescription" rows="4" required></textarea>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn">حفظ</button>
+                                <button type="button" class="btn-cancel" id="cancelServiceEdit">إلغاء</button>
                             </div>
                         </form>
                     </div>
                 </div>
-            </div>
 
-            <!-- قسم الخدمات -->
-            <div class="admin-section" id="services-section">
-                <h2 class="section-title mb-4">إدارة الخدمات</h2>
-                
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>اسم الخدمة</th>
-                                        <th>الوصف</th>
-                                        <th>الإجراءات</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>جسور معدنية</td>
-                                        <td>جسور معدنية عالية الجودة مصنوعة من أفضل المواد لضمان المتانة والراحة.</td>
-                                        <td>
-                                            <button class="btn btn-sm btn-primary edit-service-btn" data-id="1">
-                                                <i class="fas fa-edit"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>جسور خزفية</td>
-                                        <td>جسور خزفية بمظهر طبيعي تماماً تمنحك ابتسامة جميلة وثقة أكبر.</td>
-                                        <td>
-                                            <button class="btn btn-sm btn-primary edit-service-btn" data-id="2">
-                                                <i class="fas fa-edit"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>زيركون</td>
-                                        <td>تيجان وجسور زيركون بأعلى جودة للحصول على مظهر طبيعي ومتانة فائقة.</td>
-                                        <td>
-                                            <button class="btn btn-sm btn-primary edit-service-btn" data-id="3">
-                                                <i class="fas fa-edit"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>بدلات - تقويم</td>
-                                        <td>بدلات أسنان كاملة وتقويم بتصميم مخصص يناسب احتياجاتك الفردية.</td>
-                                        <td>
-                                            <button class="btn btn-sm btn-primary edit-service-btn" data-id="4">
-                                                <i class="fas fa-edit"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                <!-- قسم معرض الأعمال -->
+                <div class="admin-section" id="portfolio-section">
+                    <h2>إدارة معرض الأعمال</h2>
+                    <div class="portfolio-controls">
+                        <button class="btn" id="addPortfolioBtn">إضافة صورة جديدة</button>
                     </div>
-                </div>
-                
-                <!-- نموذج تعديل الخدمة -->
-                <div class="modal fade" id="editServiceModal" tabindex="-1" aria-labelledby="editServiceModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="editServiceModalLabel">تعديل الخدمة</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form id="edit-service-form">
-                                    <input type="hidden" id="service-id">
-                                    <div class="mb-3">
-                                        <label for="service-name" class="form-label">اسم الخدمة</label>
-                                        <input type="text" class="form-control" id="service-name" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="service-description" class="form-label">وصف الخدمة</label>
-                                        <textarea class="form-control" id="service-description" rows="3" required></textarea>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="service-image" class="form-label">صورة الخدمة</label>
-                                        <input type="file" class="form-control" id="service-image" accept="image/*">
-                                        <div class="mt-2">
-                                            <img id="service-image-preview" src="" alt="معاينة الصورة" class="img-fluid d-none">
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
-                                <button type="button" class="btn btn-primary" id="save-service-btn">حفظ التغييرات</button>
-                            </div>
-                        </div>
+                    <div class="portfolio-grid" id="adminPortfolioGrid">
+                        <!-- سيتم إضافة الصور هنا ديناميكياً -->
                     </div>
-                </div>
-            </div>
 
-            <!-- قسم معرض الأعمال -->
-            <div class="admin-section" id="portfolio-section">
-                <h2 class="section-title mb-4">إدارة معرض الأعمال</h2>
-                
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-end mb-4">
-                            <button class="btn btn-primary" id="add-portfolio-btn">
-                                <i class="fas fa-plus me-2"></i> إضافة صورة جديدة
-                            </button>
-                        </div>
-                        
-                        <div class="portfolio-gallery admin-gallery">
-                            <!-- سيتم إنشاء العناصر ديناميكياً من خلال JavaScript -->
-                        </div>
+                    <div class="portfolio-upload-form" id="portfolioUploadForm" style="display: none;">
+                        <h3>إضافة صورة جديدة</h3>
+                        <form id="uploadPortfolioForm">
+                            <div class="form-group">
+                                <label for="portfolioImage">اختر صورة</label>
+                                <input type="file" id="portfolioImage" name="portfolioImage" accept="image/*" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="portfolioDescription">وصف الصورة</label>
+                                <input type="text" id="portfolioDescription" name="portfolioDescription" placeholder="وصف اختياري">
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn">رفع الصورة</button>
+                                <button type="button" class="btn-cancel" id="cancelPortfolioUpload">إلغاء</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
-                
-                <!-- نموذج إضافة/تعديل صورة -->
-                <div class="modal fade" id="portfolioModal" tabindex="-1" aria-labelledby="portfolioModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="portfolioModalLabel">إضافة صورة جديدة</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form id="portfolio-form">
-                                    <input type="hidden" id="portfolio-id">
-                                    <div class="mb-3">
-                                        <label for="portfolio-title" class="form-label">عنوان الصورة</label>
-                                        <input type="text" class="form-control" id="portfolio-title" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="portfolio-image" class="form-label">الصورة</label>
-                                        <input type="file" class="form-control" id="portfolio-image" accept="image/*">
-                                        <div class="mt-2">
-                                            <img id="portfolio-image-preview" src="" alt="معاينة الصورة" class="img-fluid d-none">
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
-                                <button type="button" class="btn btn-primary" id="save-portfolio-btn">حفظ</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- قسم الرسائل -->
-            <div class="admin-section" id="messages-section">
-                <h2 class="section-title mb-4">إدارة الرسائل</h2>
-                
-                <div class="card">
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>الاسم</th>
-                                        <th>البريد الإلكتروني</th>
-                                        <th>الخدمة</th>
-                                        <th>التاريخ</th>
-                                        <th>الإجراءات</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="messages-table-body">
-                                    <tr>
-                                        <td colspan="6" class="text-center">لا توجد رسائل حتى الآن</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                <!-- قسم الرسائل -->
+                <div class="admin-section" id="messages-section">
+                    <h2>الرسائل المستلمة</h2>
+                    <div class="messages-list" id="messagesList">
+                        <!-- سيتم إضافة الرسائل هنا ديناميكياً -->
                     </div>
-                </div>
-                
-                <!-- نموذج عرض الرسالة -->
-                <div class="modal fade" id="viewMessageModal" tabindex="-1" aria-labelledby="viewMessageModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="viewMessageModalLabel">عرض الرسالة</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="message-details">
-                                    <div class="mb-3">
-                                        <label class="fw-bold">الاسم:</label>
-                                        <p id="message-name"></p>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="fw-bold">البريد الإلكتروني:</label>
-                                        <p id="message-email"></p>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="fw-bold">رقم الهاتف:</label>
-                                        <p id="message-phone"></p>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="fw-bold">الخدمة:</label>
-                                        <p id="message-service"></p>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="fw-bold">الرسالة:</label>
-                                        <p id="message-content"></p>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="fw-bold">التاريخ:</label>
-                                        <p id="message-date"></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
-                                <a href="#" class="btn btn-primary" id="reply-message-btn">
-                                    <i class="fas fa-reply me-2"></i> الرد
-                                </a>
-                            </div>
-                        </div>
+                    <div class="no-messages" id="noMessages" style="display: none;">
+                        <p>لا توجد رسائل مستلمة حتى الآن.</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/admin.js"></script>
+    <script src="./js/admin.js"></script>
 </body>
 </html>
